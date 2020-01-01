@@ -30,7 +30,7 @@ $ docker run --privileged  -d \
               -p 8080:8080 \
               -p 8999:8999 \
               -p 8999:8999/udp \
-              markusmcnugen/qbittorrentvpn
+              tranchung/qbittorrent
 ```
 
 # Variables, Volumes, and Ports
@@ -52,7 +52,7 @@ $ docker run --privileged  -d \
 ## Volumes
 | Volume | Required | Function | Example |
 |----------|----------|----------|----------|
-| `qBittorrent` | Yes | qBittorrent and OpenVPN config files | `/your/config/path/:/config`|
+| `qBittorrent` | Yes | qBittorrent and OpenVPN config files | `/your/config/path/:/config/qBittorrent`|
 | `client.ovpn` | No | OpenVPN config file if `VPN_ENABLED=yes` | `/your/openvpn/client.conf:/config/client.ovpn`|
 | `downloads` | No | Default download path for torrents | `/your/downloads/path/:/downloads`|
 
@@ -109,13 +109,14 @@ To build this container, clone the repository and cd into it.
 
 ## Build it:
 ```
-$ cd /repo/location/qbittorrentvpn
-$ docker build -t qbittorrentvpn .
+$ cd /repo/location/qbittorrent
+$ docker build -t qbittorrent .
 ```
 ## Run it:
 ```
 $ docker run --privileged  -d \
-              -v /your/config/path/:/config \
+              -v /your/qBittorrent/path/:/config/qBittorrent \
+              -v /your/openvpn/client.conf:/config/client.ovpn \
               -v /your/downloads/path/:/downloads \
               -e "VPN_ENABLED=yes" \
               -e "LAN_NETWORK=192.168.1.0/24" \
@@ -123,7 +124,7 @@ $ docker run --privileged  -d \
               -p 8080:8080 \
               -p 8999:8999 \
               -p 8999:8999/udp \
-              qbittorrentvpn
+              qbittorrent
 ```
 
 This will start a container as described in the "Run container from Docker registry" section.

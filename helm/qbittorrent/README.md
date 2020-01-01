@@ -17,7 +17,7 @@ Please note that only Private Internet Access (PIA) VPN provider is implemented 
 
 ## Installing the Chart
 
-To install the chart, use the following, this backs Vault with a Consul cluster:
+To install the chart, use the following:
 
 ### Without VPN Support
 ```console
@@ -27,7 +27,7 @@ $ helm install --set vpn.enabled=false --name qbittorrent https://raw.githubuser
 ```console
 $ VPN_USERNAME=myVpnUsername
 $ VPN_PASSWORD=myVpnPassword
-$ helm install --set vpn.enabled=false,vpn.username=$VPN_USERNAME,vpn.password=$VPN_PASSWORD --name qbittorrent https://raw.githubusercontent.com/trankchung/qbittorrent/master/helm/qbittorrent-1.0.0.tgz
+$ helm install --set vpn.enabled=true,vpn.username=$VPN_USERNAME,vpn.password=$VPN_PASSWORD --name qbittorrent https://raw.githubusercontent.com/trankchung/qbittorrent/master/helm/qbittorrent-1.0.0.tgz
 ```
 
 ## Configuration
@@ -38,7 +38,7 @@ The following table lists the configurable parameters for the qBittorrent chart 
 |--------------------------------------|-------------------------------------------|-------------------------------------|
 | `image.registry`                     | Container registry                        | `docker.io`                         |
 | `image.repository`                   | Container image to use                    | `tranchung/qbittorent`              |
-| `image.tag`                          | Container image tag to deploy             | `bionic`                            |
+| `image.tag`                          | Container image tag to deploy             | `v1.0.0`                            |
 | `image.pullPolicy`                   | Container pull policy                     | `IfNotPresent`                      |
 | `vpn.enabled`                        | Enable VPN support                        | `false`                             |
 | `vpn.username`                       | VPN username                              | `vpnUsername`                       |
@@ -54,7 +54,7 @@ The following table lists the configurable parameters for the qBittorrent chart 
 | `service.nodePort`                   | Node port if `type=NodePort`              | `""`                                |
 | `service.externalTrafficPolicy`      | External traffic policy                   | `Cluster`                           |
 | `service.annotations`                | Service annotations                       | `{}`                                |
-| `persistence.data.enabled`           | Data persistent for qBittorrent setings   | `true`                              |
+| `persistence.data.enabled`           | Data persistent for qBittorrent settings   | `true`                              |
 | `persistence.data.accessMode`        | Data volume access mode                   | `ReadWriteOnce`                     |
 | `persistence.data.size`              | Data volume size                          | `128Mi`                             |
 | `persistence.data.storageClass`      | Data volume storage class                 | `""`                                |
