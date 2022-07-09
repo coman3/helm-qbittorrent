@@ -21,7 +21,9 @@ jobs:
         uses: azure/setup-helm@v1
         with:
           version: v3.8.1
-
+      - name: "update helm chart version"
+        run: |
+          "sed -i 's/0.0.1/${{github.run_number}}/g' charts/qbittorrent-vpn/Chart.yaml"
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.4.0
         env:
