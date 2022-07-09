@@ -1,4 +1,4 @@
-name: backend-service
+name: Docker Build
 on: [push]
 env:
   IMAGE_NAME: ${{ github.actor }}/qbittorent-vpn
