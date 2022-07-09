@@ -1,5 +1,8 @@
 name: Docker Build
-on: [push]
+on:
+  push:
+    branches:
+      - main
 env:
   IMAGE_NAME: ${{ github.actor }}/qbittorent-vpn
   REGISTRY: ghcr.io
