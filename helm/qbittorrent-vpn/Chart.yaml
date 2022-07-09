@@ -1,0 +1,9 @@
+apiVersion: v1
+description: A Helm chart for qBittorentt with OpenVPN
+name: qbittorrent-vpn
+version: 0.0.1
+appVersion: 0.0.1
+home: https://github.com/coman3/qbittorrent-vpn-helm.git
+maintainers:
+  - name: Lachlan van der Velden
+    email: me@lachlanvelden.com

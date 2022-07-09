@@ -13,11 +13,9 @@
 #
 # fullnameOverride:
 
-# ref: https://hub.docker.com/r/tranchung/qbittorrentvpn/tags
-#
 image:
   registry: docker.io
-  repository: tranchung/qbittorrent
+  repository: coman3/qbittorrent
   tag: v1.0.0
   # Specify a imagePullPolicy
   # Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -25,7 +23,7 @@ image:
   #
   pullPolicy: IfNotPresent
 
-# ref: https://github.com/trankchung/qbittorrent/tree/master/docker#environment-variables
+
 vpn:
   # For VPN_ENABLED environment variable
   enabled: false

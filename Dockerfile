@@ -3,7 +3,6 @@
 # Version 1.8
 
 FROM ubuntu:20.04
-MAINTAINER MarkusMcNugen
 
 VOLUME /downloads
 VOLUME /config
@@ -22,8 +21,8 @@ RUN apt-get update \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add configuration and scripts
-ADD openvpn/ /etc/openvpn/
-ADD qbittorrent/ /etc/qbittorrent/
+ADD scripts/openvpn/ /etc/openvpn/
+ADD scripts/qbittorrent/ /etc/qbittorrent/
 
 RUN chmod +x /etc/qbittorrent/*.sh /etc/qbittorrent/*.init /etc/openvpn/*.sh
 
