@@ -37,4 +37,33 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           docker tag ${{ env.REGISTRY }}/$IMAGE_NAME:${{ github.sha }} ${{ env.REGISTRY }}/$IMAGE_NAME:latest
-          docker push ${{ env.REGISTRY }}/$IMAGE_NAME:latest ${{ env.REGISTRY }}/$IMAGE_NAME:${{ github.sha }}
+          docker push ${{ env.REGISTRY }}/$IMAGE_NAME:latest
+          docker push ${{ env.REGISTRY }}/$IMAGE_NAME:${{ github.sha }}
+  release:
+    needs: [ build-container ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.8.1
+      - name: "update helm chart app version"
+        working-directory: ./charts/qbittorrent-vpn
+        run: sed -i 's/1.0.0/1.0.0-${{ github.sha }}/g' Chart.yaml
+      - name: "update helm chart version"
+        working-directory: ./charts/qbittorrent-vpn
+        run: sed -i 's/0.0.1/0.0.${{github.run_number}}/g' Chart.yaml        
+      - name: "update docker image hash"
+        working-directory: ./charts/qbittorrent-vpn
+        run: sed -i 's/latest/${{ github.sha }}/g' values.yaml      
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.4.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
