@@ -28,7 +28,7 @@ jobs:
 
       - name: Tag and Push container
         env:
-          IMAGE_VERSION: ${{ GITHUB_RUN_NUMBER }}
+          IMAGE_VERSION: v1.0.${{ github.run_number }}
         run: |
           docker tag ${{ env.REGISTRY }}/$IMAGE_NAME:${{ github.sha }} ${{ env.REGISTRY }}/$IMAGE_NAME:$IMAGE_VERSION
           docker push ${{ env.REGISTRY }}/$IMAGE_NAME:$IMAGE_VERSION
