@@ -23,14 +23,22 @@ image:
   #
   pullPolicy: IfNotPresent
 
+dnsConfig:
+  nameservers:
+    - 8.8.8.8
+    - 8.8.4.4
 
 vpn:
   # For VPN_ENABLED environment variable
   enabled: false
-  # For VPN_USERNAME environment variable
-  username: vpnUsername
-  # For VPN_PASSWORD environment variable
-  password: vpnPassword
+  credentials:
+    secret:
+      create: true
+      name: ""
+    # For VPN_USERNAME environment variable
+    username: vpnUsername
+    # For VPN_PASSWORD environment variable
+    password: vpnPassword
   
   # VPN provider. Currently only supports Private Internet Access (pia)
   provider: pia
@@ -133,8 +141,11 @@ persistence:
   # Stores the downloaded torrents
   downloads:
     enabled: true
+    createClaim: true
     accessMode: ReadWriteOnce
     size: 10Gi
+    mountPath: /downloads
+    volume: {}
     # storageClass: ""
 
 # Configure the ingress resource that allows you to access the
@@ -144,6 +155,7 @@ ingress:
   # Set to true to enable ingress record generation
   enabled: false
 
+  className: nginx
   # Ingress annotations done as key:value pairs
   # For a full list of possible ingress annotations, please see
   # ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -158,7 +170,7 @@ ingress:
   hosts:
   - name: qbittorrent.local
     path: /
-
+    pathType: Prefix
     # Set this to true in order to enable TLS on the ingress record
     tls: true
 

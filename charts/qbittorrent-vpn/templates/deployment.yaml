@@ -43,9 +43,23 @@ spec:
           value: "no"
         {{- end }}
         - name: VPN_USERNAME
-          value: {{ .Values.vpn.username | quote }}
+          valueFrom:
+            secretKeyRef:
+              key: username
+            {{- if ne .Values.vpn.credentials.secret.name "" }}
+              name: {{ .Values.vpn.credentials.secret.name }}
+            {{- else}}
+              name: {{ template "qbittorrent.fullname" . }}
+            {{- end }}
         - name: VPN_PASSWORD
-          value: {{ .Values.vpn.password | quote }}
+          valueFrom:
+            secretKeyRef:
+            {{- if ne .Values.vpn.credentials.secret.name "" }}
+              name: {{ .Values.vpn.credentials.secret.name }}
+            {{- else}}
+              name: {{ template "qbittorrent.fullname" . }}
+            {{- end }}
+              key: password
         - name: LAN_NETWORK
           value: {{ default "10.0.0.0/8" .Values.vpn.lanNetwork | quote }}
         {{- range $key, $value := .Values.extraEnvVars }}
@@ -66,7 +80,7 @@ spec:
         - name: qb-data
           mountPath: /config/qBittorrent
         - name: qb-downloads
-          mountPath: /downloads
+          mountPath: {{.Values.persistence.downloads.mountPath}}
         - name: vpn-config
           mountPath: /config
         livenessProbe:
@@ -89,21 +103,29 @@ spec:
         {{- end }}
       dnsPolicy: None
       dnsConfig:
-        nameservers:
-        - 8.8.8.8
-        - 8.8.4.4
+        {{- with .Values.dnsConfig }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       volumes:
       - name: qb-data
-      {{- if .Values.persistence.data.enabled }}
+      {{- if and .Values.persistence.data.enabled .Values.persistence.data.createClaim }}
         persistentVolumeClaim:
           claimName: {{ template "qbittorrent.fullname" . }}-data
+      {{- else if and .Values.persistence.data.enabled (not .Values.persistence.data.createClaim) }}
+        {{- with .Values.persistence.data.volume }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       {{- else }}
         emptyDir: {}
       {{- end }}
       - name: qb-downloads
-      {{- if .Values.persistence.downloads.enabled }}
+      {{- if and .Values.persistence.downloads.enabledtrue .Values.persistence.downloads.createClaim }}
         persistentVolumeClaim:
           claimName: {{ template "qbittorrent.fullname" . }}-downloads
+      {{- else if and .Values.persistence.downloads.enabled (not .Values.persistence.downloads.createClaim) }}
+        {{- with .Values.persistence.downloads.volume }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       {{- else }}
         emptyDir: {}
       {{- end }}

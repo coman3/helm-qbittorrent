@@ -1,0 +1,23 @@
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    # Optional: Only allow access from internal network
+    # nginx.ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/16
+  hosts:
+    - name: qbittorrent.local
+      path: /
+      tls: true
+      tlsHosts:
+        - qbittorrent.local
+      tlsSecret: qbittorrent-tls-cert
+persistence:
+  downloads:
+    enabled: true
+    createClaim: false
+    mountPath: /media
+    volume:
+      nfs:
+        #! server: <set nfs server url here>
+        path: "/mounted-path"
