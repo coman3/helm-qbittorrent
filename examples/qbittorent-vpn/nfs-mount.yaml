@@ -3,14 +3,14 @@ ingress:
   className: nginx
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    # Optional: Only allow access from internal network
-    nginx.ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/16
+    # Optional: Only allow access from internal subnet
+    # nginx.ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/16
   hosts:
-    - name: torrent.velden.au
+    - name: torrent.example.com
       path: /
       tls: true
       tlsHosts:
-        - torrent.velden.au
+        - torrent.example.com
       tlsSecret: qbittorrent-tls-cert
 vpn:
   enabled: true
@@ -98,5 +98,5 @@ persistence:
     mountPath: /media
     volume:
       nfs:
-        server: 10.0.0.100
-        path: "/mnt/exos-16tb/media"
+        #! server: <external nfs server here>
+        path: "/random/mount/on/external/server"
