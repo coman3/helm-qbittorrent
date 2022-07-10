@@ -82,7 +82,7 @@ spec:
         - name: qb-downloads
           mountPath: {{.Values.persistence.downloads.mountPath}}
         - name: vpn-config
-          mountPath: /config
+          mountPath: /openvpn
         livenessProbe:
           httpGet:
             path: /

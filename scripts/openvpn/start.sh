@@ -24,7 +24,7 @@ fi
 if [[ $VPN_ENABLED == "yes" ]]; then
 	# Set default path to OpenVPN config file if not defined.
 	if [ -z "$VPN_CONFIG" ]; then
-		export VPN_CONFIG=/config/client.ovpn
+		export VPN_CONFIG=/openvpn/client.ovpn
 	fi
 
 	# exit if ovpn file not found
