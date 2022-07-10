@@ -31,6 +31,8 @@ dnsConfig:
 vpn:
   # For VPN_ENABLED environment variable
   enabled: false
+  # Attach your .ovpn configuration file here
+  config: ""
   credentials:
     secret:
       create: true
@@ -41,64 +43,7 @@ vpn:
     password: vpnPassword
   
   # VPN provider. Currently only supports Private Internet Access (pia)
-  provider: pia
-
-  # PIA hosts and port.
-  # AU Melbourne: au-melbourne.privateinternetaccess.com 1198
-  # AU Perth: au-perth.privateinternetaccess.com 1198
-  # Austria: austria.privateinternetaccess.com 1198
-  # AU Sydney: au-sydney.privateinternetaccess.com 1198
-  # Belgium: belgium.privateinternetaccess.com 1198
-  # CA Montreal: ca-montreal.privateinternetaccess.com 1198
-  # CA Toronto: ca-toronto.privateinternetaccess.com 1198
-  # CA Vancouver: ca-vancouver.privateinternetaccess.com 1198
-  # Czech Republic: czech.privateinternetaccess.com 1198
-  # DE Berlin: de-berlin.privateinternetaccess.com 1198
-  # DE Frankfurt: de-frankfurt.privateinternetaccess.com 1198
-  # Denmark: denmark.privateinternetaccess.com 1198
-  # Finland: fi.privateinternetaccess.com 1198
-  # France: france.privateinternetaccess.com 1198
-  # Hong Kong: hk.privateinternetaccess.com 1198
-  # Hungary: hungary.privateinternetaccess.com 1198
-  # India: in.privateinternetaccess.com 1198
-  # Ireland: ireland.privateinternetaccess.com 1198
-  # Israel: israel.privateinternetaccess.com 1198
-  # Italy: italy.privateinternetaccess.com 1198
-  # Japan: japan.privateinternetaccess.com 1198
-  # Luxembourg: lu.privateinternetaccess.com 1198
-  # Mexico: mexico.privateinternetaccess.com 1198
-  # Netherlands: nl.privateinternetaccess.com 1198
-  # New Zealand: nz.privateinternetaccess.com 1198
-  # Norway: no.privateinternetaccess.com 1198
-  # Poland: poland.privateinternetaccess.com 1198
-  # Romania: ro.privateinternetaccess.com 1198
-  # Singapore: sg.privateinternetaccess.com 1198
-  # Spain: spain.privateinternetaccess.com 1198
-  # Sweden: sweden.privateinternetaccess.com 1198
-  # Switzerland: swiss.privateinternetaccess.com 1198
-  # UAE: ae.privateinternetaccess.com 1198
-  # UK London: uk-london.privateinternetaccess.com 1198
-  # UK Manchester: uk-manchester.privateinternetaccess.com 1198
-  # UK Southampton: uk-southampton.privateinternetaccess.com 1198
-  # US Atlanta: us-atlanta.privateinternetaccess.com 1198
-  # US California: us-california.privateinternetaccess.com 1198
-  # US Chicago: us-chicago.privateinternetaccess.com 1198
-  # US Denver: us-denver.privateinternetaccess.com 1198
-  # US East: us-east.privateinternetaccess.com 1198
-  # US Florida: us-florida.privateinternetaccess.com 1198
-  # US Houston: us-houston.privateinternetaccess.com 1198
-  # US Las Vegas: us-lasvegas.privateinternetaccess.com 1198
-  # US New York City: us-newyorkcity.privateinternetaccess.com 1198
-  # US Seattle: us-seattle.privateinternetaccess.com 1198
-  # US Silicon Valley: us-siliconvalley.privateinternetaccess.com 1198
-  # US Texas: us-texas.privateinternetaccess.com 1198
-  # US Washington DC: us-washingtondc.privateinternetaccess.com 1198
-  # US West: us-west.privateinternetaccess.com 1198
-
-  # List of hosts and port can be found in https://www.privateinternetaccess.com/openvpn/openvpn.zip
-  host: us-east.privateinternetaccess.com
-  port: 1198
-  
+  provider: custom  
   # LAN subnet that includes all worker nodes' podCIDR. Leave as default would work in most cases.
   # # LAN_NETWORK environment variable
   lanNetwork: "10.0.0.0/8"

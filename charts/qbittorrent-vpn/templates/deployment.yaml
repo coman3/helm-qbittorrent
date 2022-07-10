@@ -130,8 +130,8 @@ spec:
         emptyDir: {}
       {{- end }}
       - name: vpn-config
-        configMap:
-          name: {{ template "qbittorrent.fullname" . }}-vpn-config
+        secret:
+          secretName: {{ template "qbittorrent.fullname" . }}-vpn-config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
