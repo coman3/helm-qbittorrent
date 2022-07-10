@@ -78,7 +78,7 @@ spec:
           protocol: UDP
         volumeMounts:
         - name: qb-data
-          mountPath: /config/qBittorrent
+          mountPath: /config
         - name: qb-downloads
           mountPath: {{.Values.persistence.downloads.mountPath}}
         - name: vpn-config
