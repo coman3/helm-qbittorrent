@@ -2,6 +2,19 @@ apiVersion: v1
 entries:
   qbittorrent-vpn:
   - apiVersion: v1
+    appVersion: 1.0.0-5890d36ec8151ad433128af5c797b559154ac13b
+    created: "2022-07-10T05:43:17.179881054Z"
+    description: A Helm chart for qBittorentt with OpenVPN
+    digest: 2bc188edd99a4f8b6741ffe79797d3349042bcb396e49c32029ced1e326a1353
+    home: https://github.com/coman3/qbittorrent-vpn-helm.git
+    maintainers:
+    - email: me@lachlanvelden.com
+      name: Lachlan van der Velden
+    name: qbittorrent-vpn
+    urls:
+    - https://github.com/coman3/qbittorrent-vpn-helm/releases/download/qbittorrent-vpn-0.0.15/qbittorrent-vpn-0.0.15.tgz
+    version: 0.0.15
+  - apiVersion: v1
     appVersion: 1.0.0-723d5f8c5e630a24646fc31f80534497c4be4ea1
     created: "2022-07-09T07:54:43.539988949Z"
     description: A Helm chart for qBittorentt with OpenVPN
@@ -40,4 +53,4 @@ entries:
     urls:
     - https://github.com/coman3/qbittorrent-vpn-helm/releases/download/qbittorrent-vpn-0.0.10/qbittorrent-vpn-0.0.10.tgz
     version: 0.0.10
-generated: "2022-07-09T07:54:43.54001045Z"
+generated: "2022-07-10T05:43:17.179896755Z"
