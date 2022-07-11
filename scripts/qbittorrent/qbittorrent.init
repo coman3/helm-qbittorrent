@@ -14,8 +14,8 @@
 # Edited log paths for docker, added umask and group to chuid option
 
 #Edit the user that qbittorrent-nox will run as.
-USER=${PUID}
-GROUP=${PGID}
+USER=root
+GROUP=root
 
 # No need to edit these. Logging is sent to /config/qBittorrent/data/logs/qbittorrent-daemon.log by default.
 PATH="/sbin:/usr/sbin:/bin:/usr/bin"
@@ -53,7 +53,7 @@ do_start()
 	#Check if log path exists. If it doesn't exist, create it.
 	if [ ! -e $QBTLOGPATH ]; then
 		mkdir -p $QBTLOGPATH
-		chown -R ${PUID}:${PGID} /config/qBittorrent
+		# chown -R ${PUID}:${PGID} /config/qBittorrent
 	fi
 	
 	#Check for log file. If it doesn't exist, create it.

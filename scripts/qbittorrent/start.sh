@@ -1,9 +1,9 @@
 #!/bin/bash
 if [[ ! -e /config/qBittorrent ]]; then
 	mkdir -p /config/qBittorrent/config/
-	chown -R ${PUID}:${PGID} /config/qBittorrent
+	#chown -R ${PUID}:${PGID} /config/qBittorrent
 else
-	chown -R ${PUID}:${PGID} /config/qBittorrent
+	#chown -R ${PUID}:${PGID} /config/qBittorrent
 fi
 
 if [[ ! -e /config/qBittorrent/config/qBittorrent.conf ]]; then
@@ -12,22 +12,22 @@ if [[ ! -e /config/qBittorrent/config/qBittorrent.conf ]]; then
 fi
 
 ## Check for missing group
-/bin/egrep  -i "^${PGID}:" /etc/passwd
-if [ $? -eq 0 ]; then
-   echo "Group $PGID exists"
-else
-   echo "Adding $PGID group"
-	 groupadd -g $PGID qbittorent
-fi
+# /bin/egrep  -i "^${PGID}:" /etc/passwd
+# if [ $? -eq 0 ]; then
+#    echo "Group $PGID exists"
+# else
+#    echo "Adding $PGID group"
+# 	 groupadd -g $PGID qbittorent
+# fi
 
 ## Check for missing userid
-/bin/egrep  -i "^${PUID}:" /etc/passwd
-if [ $? -eq 0 ]; then
-   echo "User $PUID exists in /etc/passwd"
-else
-   echo "Adding $PUID user"
-	 useradd -c "qbittorent user" -g $PGID -u $PUID qbittorent
-fi
+# /bin/egrep  -i "^${PUID}:" /etc/passwd
+# if [ $? -eq 0 ]; then
+#    echo "User $PUID exists in /etc/passwd"
+# else
+#    echo "Adding $PUID user"
+# 	 useradd -c "qbittorent user" -g $PGID -u $PUID qbittorent
+# fi
 
 # set umask
 export UMASK=$(echo "${UMASK}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')

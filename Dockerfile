@@ -9,8 +9,7 @@ VOLUME /config
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN usermod -u 99 nobody
-
+USER root
 # Update packages and install software
 RUN apt-get update \
     && apt-get install -y --no-install-recommends apt-utils openssl \
